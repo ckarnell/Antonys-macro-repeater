@@ -15,7 +15,7 @@ fun! AtRepeat(_)
 endfun
 
 fun! AtSetRepeat(_)
-    set opfunc=AtRepeat
+    set operatorfunc=AtRepeat
 endfun
 
 " Called by g@ being invoked directly for the first time. Sets
@@ -23,7 +23,7 @@ endfun
 fun! AtInit()
     " Make sure setting 'opfunc' happens here, after initial playback
     " of the macro recording, in case 'opfunc' is set there.
-    set opfunc=AtSetRepeat
+    set operatorfunc=AtSetRepeat
     return 'g@l'
 endfun
 
@@ -34,8 +34,8 @@ ino <expr> <plug>@init "\<c-o>".AtInit()
 
 fun! AtReg()
     let s:atcount = v:count1
-    let c = nr2char(getchar())
-    return '@'.c."\<plug>@init"
+    let l:c = nr2char(getchar())
+    return '@'.l:c."\<plug>@init"
 endfun
 
 
@@ -47,11 +47,11 @@ fun! QRepeat(_)
 endfun
 
 fun! QSetRepeat(_)
-    set opfunc=QRepeat
+    set operatorfunc=QRepeat
 endfun
 
 fun! QStop()
-    set opfunc=QSetRepeat
+    set operatorfunc=QSetRepeat
     return 'g@l'
 endfun
 
